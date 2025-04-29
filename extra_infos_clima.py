@@ -27,3 +27,12 @@ URL = join('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/se
 dados = pd.read_csv(URL) # Lê os dados da URL e armazena em um DataFrame do pandas
 # Aqui os dados são lidos a partir da URL e armazenados em um DataFrame do pandas       
 print(dados.head()) 
+
+# Definindo o caminho
+file_path = f'/root/data_pipeline_tempo/seamana={data_inicio}'
+os.mkdir(file_path) #Para que a pasta seja criada no caminho
+
+# Criando o csv com o pandas
+dados.to_csv(file_path + 'dados_brutos.csv')
+dados[['datetime', 'tempmin', 'temp', 'tempmax']].to_csv(file_path + 'temperaturas.csv') # Info mais importantes 
+dados[['datetime', 'description', 'icon']].to_csv(file_path + 'condicoes.csv')# Info mais importantes 
